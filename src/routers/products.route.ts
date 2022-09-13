@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import productController from './controllers/product.controller';
+import productController from '../controllers/product.controller';
 
 const routers = Router();
 
-routers.use('/', productController);
+routers.post('/', productController);
 
 export default routers;

@@ -11,7 +11,13 @@ class ProductService {
   }
 
   public newProduct(product: Product): Promise<Product> {
+    // console.log('entrou', product);
     return this.model.create(product);
+  }
+
+  public getAllProducts(): Promise<Product[]> {
+    const products = this.model.getAll();
+    return products;
   }
 }
 

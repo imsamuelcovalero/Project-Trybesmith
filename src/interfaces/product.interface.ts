@@ -1,8 +1,16 @@
-interface Product {
+export interface Product {
   id?: number;
-  title: string;
-  directedBy: string;
-  releaseYear: Date;
+  name: string;
+  ammount: number;
+  orderId: number;
 }
 
-export default Product;
+// export default Product;
+
+export interface ProductController {
+  create(): Promise<Product>;
+  list(): Promise<Product[]>;
+  getById(id: number): Promise<Product>;
+  update(id: number): Promise<Product>;
+  delete(id: number): Promise<Product>;
+}

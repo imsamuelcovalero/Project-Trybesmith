@@ -1,4 +1,5 @@
 import { Pool, ResultSetHeader } from 'mysql2/promise';
+import { ILogin } from '../interfaces/login.interface';
 import { IUser } from '../interfaces/user.interface';
 
 export default class UserModel {
@@ -19,5 +20,17 @@ export default class UserModel {
     const [dataInserted] = result;
     const { insertId } = dataInserted;
     return { id: insertId, ...user };
+  }
+
+  // procura o usuário pelo username e o password, verifica se estão no banco de dados
+  public async getByUsername(username: string, password: string): Promise<ILogin> {
+    const result = await this.connection.execute(
+      'SELECT * FROM Trybesmith.Users WHERE username = ? AND password = ?',
+      [username, password],
+    );
+    const [data] = result;
+    console.log('data', data);
+
+    return data as unknown as ILogin;
   }
 }

@@ -1,5 +1,6 @@
 import { sign, SignOptions } from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { ILogin } from '../interfaces/login.interface';
 import { IUser } from '../interfaces/user.interface';
 
 dotenv.config();
@@ -9,13 +10,13 @@ dotenv.config();
 
 const jwtSecret = 'secret';
 
-export default async function generateToken(user: IUser) {
+export default async function generateToken(password: IUser | ILogin) {
   const signOptions: SignOptions = {
     expiresIn: '7d',
     algorithm: 'HS256',
   };
 
-  const { password } = user;
+  // const { password } = user;
   const token = sign({ password }, jwtSecret, signOptions);
   return token;
 }

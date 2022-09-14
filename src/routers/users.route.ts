@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import UserController from '../controllers/user.controller';
-// import { validate } from '../middlewares/validate.middleware';
+import validators from '../middlewares/validators';
 
 const routers = Router();
 
 const userController = new UserController();
 
-routers.post('/', userController.create);
+routers.post('/', validators.validateNewUser, userController.create);
 // routers.get('/', userController.getAll);
 
 export default routers;

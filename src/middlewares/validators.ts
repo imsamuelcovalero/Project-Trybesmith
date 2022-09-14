@@ -1,11 +1,9 @@
-// import { error } from 'console';
 import { NextFunction, Request, Response } from 'express';
 import Joi from 'joi';
 import CustomError from '../errors/CustomError';
-// arquivo resposável por criar as funções de validação com Joi
+import newUserSchema from './joySchemaNewUser';
 
 const validators = {
-  // função com Joi para validar a entrada de login, com nome e senha
   validateLogin(req: Request, _res: Response, next: NextFunction) {
     console.log('validando login', req.body);
     const schema = Joi.object({
@@ -19,6 +17,43 @@ const validators = {
       // const [status, message] = error.message.split('|');
       throw new CustomError(400, message);
       // return res.status(400).json({ message });
+    }
+
+    next();
+  },
+
+  // função com Joi para validar a entrada de produtos, com nome e amount
+  validateNewProduct(req: Request, _res: Response, next: NextFunction) {
+    const schema = Joi.object({
+      name: Joi.string().required().min(2).messages({
+        'any.required': '400|"name" is required',
+        'string.base': '422|"name" must be a string',
+        'string.min': '422|"name" length must be at least 3 characters long',
+      }),
+      amount: Joi.string().required().min(2).messages({
+        'any.required': '400|"amount" is required',
+        'string.min': '422|"amount" length must be at least 3 characters long',
+        'string.base': '422|"amount" must be a string',
+      }),
+    });
+    const { error } = schema.validate(req.body);
+
+    if (error) {
+      const [status, message] = error.message.split('|');
+      throw new CustomError(status, message);
+    }
+
+    next();
+  },
+
+  // função com Joi para validar a entrada de usuarios com username, classe, level e password
+  validateNewUser(req: Request, _res: Response, next: NextFunction) {
+    const schema = newUserSchema;
+    const { error } = schema.validate(req.body);
+
+    if (error) {
+      const [status, message] = error.message.split('|');
+      throw new CustomError(status, message);
     }
 
     next();

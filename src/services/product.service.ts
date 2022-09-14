@@ -1,6 +1,6 @@
 import connection from '../models/connection';
 import ProductModel from '../models/product.model';
-import { Product } from '../interfaces/product.interface';
+import { IProduct } from '../interfaces/product.interface';
 // import CustomError from '../errors/CustomError';
 
 class ProductService {
@@ -10,12 +10,12 @@ class ProductService {
     this.model = new ProductModel(connection);
   }
 
-  public newProduct(product: Product): Promise<Product> {
+  public newProduct(product: IProduct): Promise<IProduct> {
     // console.log('entrou', product);
     return this.model.create(product);
   }
 
-  public getAllProducts(): Promise<Product[]> {
+  public getAllProducts(): Promise<IProduct[]> {
     const products = this.model.getAll();
     return products;
   }

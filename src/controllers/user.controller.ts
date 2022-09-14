@@ -7,7 +7,9 @@ class UserController {
 
   public create = async (req: Request, res: Response)/* : Promise<Response> */ => {
     const token = await this.userService.newUser(req.body);
-    res.status(201).json(token);
+    console.log('token', token);
+
+    res.status(201).json({ token });
   };
 
   // public getAll = async (req: Request, res: Response) => {

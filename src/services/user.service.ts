@@ -1,7 +1,8 @@
 import connection from '../models/connection';
 import UserModel from '../models/user.model';
-import { User } from '../interfaces/user.interface';
+import { IUser } from '../interfaces/user.interface';
 // import CustomError from '../errors/CustomError';
+import generateToken from '../middlewares/tokenGenerator';
 
 class UserService {
   public model: UserModel;
@@ -10,8 +11,10 @@ class UserService {
     this.model = new UserModel(connection);
   }
 
-  public newUser(user: User): Promise<User> {
-    return this.model.create(user);
+  public async newUser(user: IUser): Promise<string> {
+    await this.model.create(user);
+    const token = generateToken(user);
+    return token;
   }
 }
 

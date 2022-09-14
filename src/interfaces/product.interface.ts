@@ -1,4 +1,4 @@
-export interface Product {
+export interface IProduct {
   id?: number;
   name: string;
   amount: number;
@@ -8,9 +8,9 @@ export interface Product {
 // export default Product;
 
 export interface ProductController {
-  create(): Promise<Product>;
-  getAll(): Promise<Product[]>;
-  getById(id: number): Promise<Product>;
-  update(id: number): Promise<Product>;
-  delete(id: number): Promise<Product>;
+  create(): Promise<IProduct>;
+  getAll(): Promise<IProduct[]>;
+  getById(id: number): Promise<IProduct>;
+  update(id: number): Promise<IProduct>;
+  delete(id: number): Promise<IProduct>;
 }

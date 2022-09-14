@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
   id?: number;
   username: string;
   classe: string;
@@ -7,9 +7,9 @@ export interface User {
 }
 
 export interface UserController {
-  create(): Promise<User>;
-  getAll(): Promise<User[]>;
-  getById(id: number): Promise<User>;
-  update(id: number): Promise<User>;
-  delete(id: number): Promise<User>;
+  create(): Promise<IUser>;
+  getAll(): Promise<IUser[]>;
+  getById(id: number): Promise<IUser>;
+  update(id: number): Promise<IUser>;
+  delete(id: number): Promise<IUser>;
 }

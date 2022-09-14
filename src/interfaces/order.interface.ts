@@ -1,8 +1,8 @@
-export interface Order {
+export interface IOrder {
   id?: number;
   userId: number;
 }
 
 export interface OrderController {
-  create(): Promise<Order>;
+  create(): Promise<IOrder>;
 }

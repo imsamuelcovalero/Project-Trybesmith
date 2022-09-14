@@ -1,5 +1,5 @@
 import { Pool, ResultSetHeader } from 'mysql2/promise';
-import { User } from '../interfaces/user.interface';
+import { IOrder } from '../interfaces/order.interface';
 
 export default class UserModel {
   public connection: Pool;
@@ -8,14 +8,14 @@ export default class UserModel {
     this.connection = connection;
   }
 
-  public async create(user: User): Promise<User> {
-    const { username, classe, level, password } = user;
+  public async create(order: IOrder): Promise<IOrder> {
+    const { username, classe, level, password } = order;
     const result = await this.connection.execute<ResultSetHeader>(
       'INSERT INTO users (username, classe, level, password) VALUES (?, ?, ?, ?)',
       [username, classe, level, password],
     );
     const [dataInserted] = result;
     const { insertId } = dataInserted;
-    return { id: insertId, ...user };
+    return { id: insertId, ...order };
   }
 }

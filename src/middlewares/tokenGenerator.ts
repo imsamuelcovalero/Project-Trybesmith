@@ -1,3 +1,25 @@
+import { sign, SignOptions } from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import { IUser } from '../interfaces/user.interface';
+
+dotenv.config();
+
+// const JWT_SECRET: Secret = process.env.JWT_SECRET as Secret;
+// console.log('JWT_SECRET', JWT_SECRET);
+
+const jwtSecret = 'secret';
+
+export default async function generateToken(user: IUser) {
+  const signOptions: SignOptions = {
+    expiresIn: '7d',
+    algorithm: 'HS256',
+  };
+
+  const { password } = user;
+  const token = sign({ password }, jwtSecret, signOptions);
+  return token;
+}
+
 // import dotenv from 'dotenv';
 // import { Jwt } from 'jsonwebtoken';
 // import { Request, Response, NextFunction } from 'express';

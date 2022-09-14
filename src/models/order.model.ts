@@ -1,21 +1,26 @@
-import { Pool, ResultSetHeader } from 'mysql2/promise';
+import { Pool } from 'mysql2/promise';
 import { IOrder } from '../interfaces/order.interface';
 
-export default class UserModel {
+export default class OrderModel {
   public connection: Pool;
 
   constructor(connection: Pool) {
     this.connection = connection;
   }
 
-  public async create(order: IOrder): Promise<IOrder> {
-    const { username, classe, level, password } = order;
-    const result = await this.connection.execute<ResultSetHeader>(
-      'INSERT INTO users (username, classe, level, password) VALUES (?, ?, ?, ?)',
-      [username, classe, level, password],
+  public async getAll(): Promise<IOrder[]> {
+    const result = await this.connection.execute(
+      `SELECT o.id AS id, o.userId AS userId, JSON_ARRAYAGG(p.id) AS productsIds
+      FROM Trybesmith.Orders AS o
+      INNER JOIN Trybesmith.Products AS p
+      ON o.id = p.orderId
+      GROUP BY o.id
+      ORDER BY userId;`,
     );
-    const [dataInserted] = result;
-    const { insertId } = dataInserted;
-    return { id: insertId, ...order };
+
+    const [data] = result;
+    // console.log('data', data);
+
+    return data as IOrder[];
   }
 }

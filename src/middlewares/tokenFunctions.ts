@@ -28,14 +28,14 @@ const tokenValidator = {
   auth: async (req: Request, _res: Response, next: NextFunction) => {
     console.log('auth');
 
-    const { Authorization } = req.headers;
+    const { authorization } = req.headers;
 
-    if (!Authorization) {
+    if (!authorization) {
       throw new CustomError(401, 'Token not found');
     }
 
     try {
-      jwt.verify(Authorization, jwtSecret);
+      jwt.verify(authorization, jwtSecret);
 
       next();
     } catch (error) {
@@ -44,11 +44,11 @@ const tokenValidator = {
   },
 
   decode: async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.Authorization;
+    const token = req.headers.authorization;
     console.log('token', token);
 
     if (!token) {
-      throw new CustomError(401, 'Token not found');
+      return res.status(401).json({ message: 'Token not found' });
     }
 
     try {

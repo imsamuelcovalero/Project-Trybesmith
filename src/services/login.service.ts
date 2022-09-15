@@ -1,8 +1,7 @@
-// cria o service do login
 import connection from '../models/connection';
 import UserModel from '../models/user.model';
-import { ILogin, IToken } from '../interfaces/login.interface';
-import generateToken from '../middlewares/tokenGenerator';
+import { ILogin } from '../interfaces/login.interface';
+import tokenValidator from '../middlewares/tokenFunctions';
 import CustomError from '../errors/CustomError';
 
 class LoginService {
@@ -12,7 +11,7 @@ class LoginService {
     this.model = new UserModel(connection);
   }
 
-  public async login(login: ILogin): Promise<IToken> {
+  public async login(login: ILogin): Promise<string> {
     const { username, password } = login;
     const user = await this.model.getByUsername(username, password);
     if (user.length === 0) {
@@ -20,8 +19,8 @@ class LoginService {
     }
     console.log('userService', user);
 
-    const token = await generateToken(user[0]);
-    return { token };
+    const token = await tokenValidator.generateToken(user[0]);
+    return token;
   }
 }
 

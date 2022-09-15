@@ -9,3 +9,8 @@ export interface IDecoded {
 export interface IGetUserAuthInfoRequest extends Request {
   user: IDecoded;
 }
+
+// cria uma interface para o erro do catch
+export interface IError {
+  message: string | unknown;
+}

@@ -8,12 +8,6 @@ const routers = Router();
 const orderController = new OrderController();
 
 routers.get('/', orderController.getAll);
-routers.post(
-  '/',
-  /* tokenValidator.auth, */
-  tokenValidator.decode,
-  validators.validateNewOrder,
-  orderController.create,
-);
+routers.post('/', tokenValidator.decode, validators.validateNewOrder, orderController.create);
 
 export default routers;

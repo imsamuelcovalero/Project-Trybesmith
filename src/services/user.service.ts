@@ -1,7 +1,7 @@
 import connection from '../models/connection';
 import UserModel from '../models/user.model';
 import { IUser } from '../interfaces/user.interface';
-import generateToken from '../middlewares/tokenGenerator';
+import tokenValidator from '../middlewares/tokenFunctions';
 
 class UserService {
   public model: UserModel;
@@ -12,7 +12,7 @@ class UserService {
 
   public async newUser(user: IUser): Promise<string> {
     await this.model.create(user);
-    const token = generateToken(user);
+    const token = tokenValidator.generateToken(user);
     return token;
   }
 

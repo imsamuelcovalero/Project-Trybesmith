@@ -5,7 +5,6 @@ import newUserSchema from './joySchemaNewUser';
 
 const validators = {
   validateLogin(req: Request, _res: Response, next: NextFunction) {
-    console.log('validando login', req.body);
     const schema = Joi.object({
       username: Joi.string().required().messages({ 'string.empty': '400|"username" is required' }),
       password: Joi.string().required().messages({ 'string.empty': 'xabla/"password"is required' }),
@@ -50,6 +49,26 @@ const validators = {
   validateNewUser(req: Request, _res: Response, next: NextFunction) {
     const schema = newUserSchema;
     const { error } = schema.validate(req.body);
+
+    if (error) {
+      const [status, message] = error.message.split('|');
+      throw new CustomError(status, message);
+    }
+
+    next();
+  },
+
+  // função com Joi para validar a entrada de novas ordens, que recebe como entrada um array de productsIds
+  validateNewOrder(req: Request, _res: Response, next: NextFunction) {
+    const schema = Joi.object({
+      productsIds: Joi.array().required().messages({
+        'any.required': '400|"productsIds" is required',
+        'array.base': '422|"productsIds" must be an array',
+        'array.empty': '422|"productsIds" must include only numbers',
+      }),
+    });
+    const { error } = schema.validate(req.body);
+    console.log('error', error);
 
     if (error) {
       const [status, message] = error.message.split('|');

@@ -18,7 +18,9 @@ class LoginService {
     if (user.length === 0) {
       throw new CustomError(401, 'Username or password invalid');
     }
-    const token = await generateToken(user);
+    console.log('userService', user);
+
+    const token = await generateToken(user[0]);
     return { token };
   }
 }

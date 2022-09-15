@@ -3,6 +3,10 @@ import { ILogin } from '../interfaces/login.interface';
 import { IUser } from '../interfaces/user.interface';
 
 export default class UserModel {
+  // static getById(_id: any) {
+  //   throw new Error('Method not implemented.');
+  // }
+
   public connection: Pool;
 
   constructor(connection: Pool) {
@@ -23,14 +27,30 @@ export default class UserModel {
   }
 
   // procura o usuário pelo username e o password, verifica se estão no banco de dados
-  public async getByUsername(username: string, password: string): Promise<ILogin> {
+  public async getByUsername(username: string, password: string): Promise<ILogin[]> {
     const result = await this.connection.execute(
       'SELECT * FROM Trybesmith.Users WHERE username = ? AND password = ?',
       [username, password],
     );
+    // console.log('result', result);
+
+    const [data] = result;
+    console.log('data', data);
+    // const [data] = BinaryRow;
+    // console.log('data', BinaryRow);
+
+    return data as ILogin[];
+  }
+
+  // procura o usuário pelo id
+  public async getById(id: number): Promise<IUser> {
+    const result = await this.connection.execute(
+      'SELECT * FROM Trybesmith.Users WHERE id = ?',
+      [id],
+    );
     const [data] = result;
     console.log('data', data);
 
-    return data as unknown as ILogin;
+    return data as unknown as IUser;
   }
 }

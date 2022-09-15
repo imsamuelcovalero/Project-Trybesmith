@@ -4,7 +4,7 @@ export interface IOrder {
 }
 
 export interface OrderController {
-  create(): Promise<IOrder>;
+  create(userId: number): Promise<IOrder>;
   getAll(): Promise<IOrder[]>;
   getById(id: number): Promise<IOrder>;
   update(id: number): Promise<IOrder>;

@@ -11,7 +11,7 @@ dotenv.config();
 const jwtSecret = 'secret';
 
 const tokenFunctions = {
-  generateToken: async (user: IUser | ILogin) => {
+  generateToken: (user: IUser | ILogin) => {
     const signOptions: SignOptions = {
       expiresIn: '7d',
       algorithm: 'HS256',
@@ -21,7 +21,7 @@ const tokenFunctions = {
     return token;
   },
 
-  decode: async (req: Request, _res: Response, next: NextFunction) => {
+  decode: (req: Request, _res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
     // console.log('token', token);
 

@@ -12,6 +12,8 @@ class OrderController {
   };
 
   public create = async (req: Request, res: Response) => {
+    console.log('xablau', (req as IGetUserAuthInfoRequest).user);
+
     const { id: userId } = (req as IGetUserAuthInfoRequest).user;
     const { productsIds } = req.body;
 

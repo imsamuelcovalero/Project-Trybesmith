@@ -31,7 +31,6 @@ export default class OrderModel {
 
     const [data] = result;
     const { insertId } = data;
-    console.log('productsIds', productsIds);
 
     productsIds.map(async (productId) => {
       await this.connection.execute<ResultSetHeader>(

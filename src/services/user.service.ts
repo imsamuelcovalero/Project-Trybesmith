@@ -16,7 +16,6 @@ class UserService {
     return token;
   }
 
-  // cria uma função para procurar um usuário pelo id
   public async getUserById(id: number): Promise<IUser> {
     const user = this.model.getById(id);
     return user;

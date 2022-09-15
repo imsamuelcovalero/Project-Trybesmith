@@ -19,7 +19,6 @@ export default class OrderModel {
     );
 
     const [data] = result;
-    // console.log('data', data);
 
     return data as IOrder[];
   }

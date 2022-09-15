@@ -9,13 +9,11 @@ export default class ProductModel {
   }
 
   public async create(product: IProduct): Promise<IProduct> {
-    // console.log('entrou', product);
     const { name, amount } = product;
     const result = await this.connection.execute<ResultSetHeader>(
       'INSERT INTO Trybesmith.Products (name, amount) VALUES (?, ?)',
       [name, amount],
     );
-    console.log('result', result);
 
     const [dataInserted] = result;
     const { insertId } = dataInserted;

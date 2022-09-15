@@ -1,7 +1,6 @@
 import connection from '../models/connection';
 import ProductModel from '../models/product.model';
 import { IProduct } from '../interfaces/product.interface';
-// import CustomError from '../errors/CustomError';
 
 class ProductService {
   public model: ProductModel;
@@ -11,7 +10,6 @@ class ProductService {
   }
 
   public newProduct(product: IProduct): Promise<IProduct> {
-    // console.log('entrou', product);
     return this.model.create(product);
   }
 

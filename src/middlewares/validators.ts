@@ -21,7 +21,6 @@ const validators = {
     next();
   },
 
-  // função com Joi para validar a entrada de produtos, com nome e amount
   validateNewProduct(req: Request, _res: Response, next: NextFunction) {
     const schema = Joi.object({
       name: Joi.string().required().min(2).messages({
@@ -45,7 +44,6 @@ const validators = {
     next();
   },
 
-  // função com Joi para validar a entrada de usuarios com username, classe, level e password
   validateNewUser(req: Request, _res: Response, next: NextFunction) {
     const schema = newUserSchema;
     const { error } = schema.validate(req.body);
@@ -58,13 +56,12 @@ const validators = {
     next();
   },
 
-  // função com Joi para validar a entrada de novas ordens, que recebe como entrada um array de productsIds
   validateNewOrder(req: Request, _res: Response, next: NextFunction) {
     const schema = Joi.object({
-      productsIds: Joi.array().required().messages({
+      productsIds: Joi.array().required().min(1).messages({
         'any.required': '400|"productsIds" is required',
         'array.base': '422|"productsIds" must be an array',
-        'array.empty': '422|"productsIds" must include only numbers',
+        'array.min': '422|"productsIds" must include only numbers',
       }),
     });
     const { error } = schema.validate(req.body);

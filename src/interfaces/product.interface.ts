@@ -5,8 +5,6 @@ export interface IProduct {
   orderId: number;
 }
 
-// export default Product;
-
 export interface ProductController {
   create(): Promise<IProduct>;
   getAll(): Promise<IProduct[]>;

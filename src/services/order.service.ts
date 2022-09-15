@@ -14,10 +14,7 @@ class OrderService {
     return orders;
   }
 
-  // cria uma função para adicionar uma nova ordem
   public async newOrder(id: number, productsIds: Array<number>): Promise<IOrder[]> {
-    console.log('productsIds', productsIds);
-
     const newOrder = this.model.create(id, productsIds);
     return newOrder;
   }

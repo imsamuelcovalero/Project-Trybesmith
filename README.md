@@ -15,7 +15,7 @@ npm install
 * Para rodar o back-end:
   ```
   docker-compose up -d
-  *A aplicação estará rodando na porta 3000: http://localhost:3000/ do navegador
+  *A aplicação estará rodando na porta 3000: http://localhost:3000/ do navegador e as requisições HTTP podem ser feitas através do Insomnia, Postman ou outro API client. 
   ```
   * Para subir o nodemon e poder fazer as requisições:
     ```

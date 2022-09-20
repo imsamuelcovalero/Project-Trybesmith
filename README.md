@@ -22,8 +22,3 @@ npm install
     Abra um terminal e rode: docker exec -it trybesmith bash
     Dentro do bash execute: npm run dev  
     ```
-## Executando Testes
-* Para rodar todos os testes:
-  ```
-    npm test
-  ```

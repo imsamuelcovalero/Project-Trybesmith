@@ -20,6 +20,7 @@ npm install
   * Para subir o nodemon e poder fazer as requisições:
     ```
     Abra um terminal e rode: docker exec -it trybesmith bash
-    Dentro do bash execute: npm run dev 
+    Dentro do bash: 
     Instale as dependências dentro do docker: npm install
+    Rode o script: npm run dev  
     ```

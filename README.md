@@ -4,7 +4,7 @@ No projeto de backend da Trybe, Trybesmith, simulamos uma loja de ferreiro medie
 
 ## Tecnologias usadas
 Back-end:
-> Desenvolvido usando: NodeJS, Express, Docker, Typescript, SQL, JWT e Joi.
+> Desenvolvido usando: NodeJS, Express, Docker, Typescript, POO, SQL, JWT e Joi.
 ## Instalando Dependências
 > Backend
 ```bash
